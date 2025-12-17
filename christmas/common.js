@@ -143,20 +143,19 @@ function createoption(selectElement, label, value = "") {
  * @returns {void}
  */
 function createNewElement(obj, form, array) {
-
-    // ez egy ismerős rész, ehhez nem kell nyúlni
-    array.push(obj);
-    renderTbody(array);
-    form.reset();
-    // ismerős rész vége
+    
     const select = getSelectElement();
     createoption(select, obj.who1, obj.who1)
     if(obj.who2 != undefined){
         createoption(select, obj.who2, obj.who2)
     }
+    array.push(obj);
+    renderTbody(array);
+    form.reset();
     const checkbox = form.querySelector("#masodikmano")
     changeCheckboxValue(checkbox)
 }
+
 
 /**
  * 
@@ -172,14 +171,14 @@ function createNewElement(obj, form, array) {
  * @returns {string}
  */
 function mapMuszak(muszakValue){
-    const muszak1Value = form.querySelector("#muszak1").value;
-    const muszak2Value = form.querySelector("#muszak2").value;
-    const muszak1 = mapMuszak(muszak1Value);
-    const muszak2 = mapMuszak(muszak2Value);
-    obj.muszak1 = muszak1;
-    if(obj.who2 !== undefined){
-        obj.muszak2 = muszak2;
+    if(muszakValue === "1"){
+        return "Délelöttös"
     }
-    console.log(muszakValue);
-    return muszakValue;
+    if(muszakValue === "2"){
+        return "Délutános"
+    }
+    if(muszakValue === "3"){
+        return "Éjszakai"
+    }
+    return muszakValue
 }
